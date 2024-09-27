@@ -42,14 +42,20 @@ namespace StorageGuru
             {
                 byte[] iconBytes = File.ReadAllBytes(filepath);
                 Texture2D tex = new Texture2D(0, 0);
-                tex.LoadImage(iconBytes);
-                return Util.applyColor(tex);
+                if (ImageConversion.LoadImage(tex, fileData))
+                {
+                    return Util.applyColor(tex);
+                }
+                else
+                {
+                    Debug.LogError($"[StorageGuru] Failed to load texture from {filepath}");
+                }
             }
 
             Debug.Log("[StorageGuru] Failed to load icon");
             return new Texture2D(1, 1);
         }
-
+        
         public static void CreateAlternativeIcons(List<ResourceType> resourceTypes)
         {
             GreyscaleTextures = new Dictionary<string, Texture2D>(); 
