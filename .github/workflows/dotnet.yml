@@ -21,8 +21,7 @@ jobs:
       uses: actions/setup-dotnet@v4
       with:
         dotnet-version: |
-          3.5
-          4.7.x
+          4.x
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
